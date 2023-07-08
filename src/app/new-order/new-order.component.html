@@ -1,0 +1,105 @@
+<div class="container card mt-5">
+    <div class="row">
+        <h3>Place Order</h3>
+        <div class="col-md-12">
+            <mat-form-field>
+                <mat-label>Customer</mat-label>
+                <mat-select [(ngModel)]="selectedCustomer" name="customer" id="customer">
+                    <mat-option *ngFor="let customer of customers" [value]="customer">
+                        {{customer.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+            <!-- total price -->
+
+            <h4>Total Price: {{totalCost}}</h4>
+
+            <!-- push the button to the end -->
+            <span class="flex-spacer"></span>
+            <button mat-flat-button color="primary" (click)="placeOrder()" >Place Order</button>
+    </div>
+
+
+    <h3>Available Products</h3>
+    <div class="mat-elevation-z8 table table-striped">
+
+        <table #productsTable mat-table [dataSource]="products">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let product"> {{product.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Price </th>
+                <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td mat-cell *matCellDef="let product">
+                    <input type="number" min="0" max="100" [(ngModel)]="product.quantity" />
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let product">
+                    <button mat-flat-button color="primary" (click)="addToCart(product)">Add to Cart</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+
+    <h3>Cart</h3>
+
+    <div class="mat-elevation-z8 table table-striped">
+        <table #cartTable mat-table [dataSource]="cart">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let cartItem"> {{cartItem.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let cartItem"> {{cartItem.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Price </th>
+                <td mat-cell *matCellDef="let cartItem"> {{cartItem.price}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td mat-cell *matCellDef="let cartItem"> {{cartItem.quantity}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let cartItem">
+                    <button mat-flat-button color="warn" (click)="removeFromCart(cartItem)">Remove from Cart</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+    </div>
+
+</div>

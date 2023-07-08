@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    <div class="card" style="padding: 20px;">
+        <form #CustomerForm="ngForm" (ngSubmit)="addCustomer(CustomerForm)">
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Customer Name</mat-label>
+                <input matInput type="text" [(ngModel)]="customer.name" name="CustomerName" id="customerName" class="form-control mb-3">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Customer Number</mat-label>
+                <input matInput type="number" [(ngModel)]="customer.number" name="customerNumber" id="customerNumber" class="form-control mb-3">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" class="w-100" type="submit" >Add</button>
+
+        </form>
+    </div>
+
+</div>

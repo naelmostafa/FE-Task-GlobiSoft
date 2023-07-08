@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    <div class="card" style="padding: 20px;">
+        <form #ProductForm="ngForm" (ngSubmit)="addProduct(ProductForm)">
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Product Name</mat-label>
+                <input matInput type="text" [(ngModel)]="product.name" name="productName" id="productName" class="form-control mb-3">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Product Price</mat-label>
+                <input matInput type="number" [(ngModel)]="product.price" name="productPrice" id="productPrice" class="form-control mb-3">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" class="w-100" type="submit" >Add</button>
+
+        </form>
+    </div>
+
+</div>
