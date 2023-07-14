@@ -14,4 +14,12 @@ export class CartService {
   public addProductToCart(cartItme: Cart) {
     return this.httpClient.post(this.PATH_OF_API + '/add', cartItme);
   }
+
+  public getCartByCustomerId(customerId: number) {
+    return this.httpClient.get(this.PATH_OF_API + '/' + customerId);
+  }
+
+  public getAllCarts() {
+    return this.httpClient.get(this.PATH_OF_API + '/all');
+  }
 }

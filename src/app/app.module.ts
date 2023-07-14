@@ -20,7 +20,8 @@ import { ShowCustomersComponent } from './show-customers/show-customers.componen
 import { MatTableModule } from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { NewOrderComponent } from './new-order/new-order.component';
+import { AddNewOrderComponent } from './add-new-order/add-new-order.component';
+import { ShowOrdersComponent } from './show-orders/show-orders.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NewOrderComponent } from './new-order/new-order.component';
     ShowProductsComponent,
     AddNewCustomerComponent,
     ShowCustomersComponent,
-    NewOrderComponent
+    AddNewOrderComponent,
+    ShowOrdersComponent
   ],
   imports: [
     BrowserModule,

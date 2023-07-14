@@ -6,18 +6,19 @@ import { MatPaginator } from '@angular/material/paginator';
 import { CartService } from '../_services/cart.service';
 import { OrderService } from '../_services/order.service';
 import { Cart } from '../_model/cart.model';
-import { CartItem } from '../_model/cartItem.model';
 
 @Component({
-  selector: 'app-new-order',
-  templateUrl: './new-order.component.html',
-  styleUrls: ['./new-order.component.scss']
+  selector: 'app-add-new-order',
+  templateUrl: './add-new-order.component.html',
+  styleUrls: ['./add-new-order.component.scss']
 })
-export class NewOrderComponent implements OnInit, AfterViewInit {
+export class AddNewOrderComponent implements OnInit, AfterViewInit {
   customers: any[] = [];
   cart: any[] = [];
   selectedCustomer: any;
   totalCost: number = 0;
+  successMessage: string = '';
+  errorMessage: string = '';
   products = new MatTableDataSource<any>();
   displayedColumns = [
     'id',
@@ -89,10 +90,14 @@ export class NewOrderComponent implements OnInit, AfterViewInit {
   }
 
   placeOrder() {
-
+    // check if selected customer is valid
+    if (!this.selectedCustomer) {
+      this.errorMessage = 'Please select a customer';
+      return;
+    }
     const cart: Cart = {
       customerId: this.selectedCustomer.id,
-      cartItems: {
+      cartItems: [
         ...this.cart.map(item => {
           return {
             quantity: item.quantity,
@@ -103,32 +108,36 @@ export class NewOrderComponent implements OnInit, AfterViewInit {
             }
           }
         })
-      },
-      totalCost: this.getTotalCost()
+      ],
     }
 
-    console.log(cart);
 
-    console.log(cart);
     this.cartService.addProductToCart(cart).subscribe(
       {
         next: (response: any) => {
-          console.log(response);
-          this.orderService.placeOrder(response).subscribe(
+          console.log(response[0].customer);
+          this.orderService.placeOrder(response[0].customer).subscribe(
             {
               next: (response: any) => {
-                console.log(response);
+                this.successMessage = 'Order placed successfully';
+                this.errorMessage = '';
                 this.cart = [];
                 this.table.renderRows();
-                this.getTotalCost();
                 this.products.data.forEach((product: any) => {
                   product.quantity = 0;
                 }
                 )
               },
-              error: (error: any) => console.log(error)
+              error: (error: any) => {
+                this.errorMessage = 'Order failed to place';
+                this.successMessage = '';
+              }
             }
           )
+        },
+        error: (error: any) => {
+          this.errorMessage = 'Order failed to place';
+          this.successMessage = '';
         }
       }
     );

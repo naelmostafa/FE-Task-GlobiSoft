@@ -15,7 +15,13 @@
 
             <h4>Total Price: {{totalCost}}</h4>
 
-            <!-- push the button to the end -->
+            <div class="alert alert-success" role="alert" *ngIf="successMessage">
+                {{successMessage}}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                {{errorMessage}}
+            </div>
+            
             <span class="flex-spacer"></span>
             <button mat-flat-button color="primary" (click)="placeOrder()" >Place Order</button>
     </div>

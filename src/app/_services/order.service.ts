@@ -14,5 +14,9 @@ export class OrderService {
   public placeOrder(customer: Customer) {
     return this.httpClient.post(this.PATH_OF_API + '/place-order', customer);
   }
+
+  public getAllOrders() {
+    return this.httpClient.get(this.PATH_OF_API + '/all');
+  }
   
 }

@@ -16,7 +16,7 @@ export class CustomerService {
   }
 
   public getCustomerById(id: number) {
-    return this.httpClient.get<Customer>(this.PATH_OF_API + '/get/' + id);
+    return this.httpClient.get<Customer>(this.PATH_OF_API + '/' + id);
   }
 
   public addCustomer(customer: Customer) {
