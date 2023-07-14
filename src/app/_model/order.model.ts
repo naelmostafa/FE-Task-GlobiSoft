@@ -6,8 +6,11 @@ export interface Order {
     createdDate?: Date;
     totalPrice?: number;
     orderItems: [{
-        product: Product;
+        id?: number;
         quantity: number;
+        price?: number;
+        createdDate?: Date;
+        product: Product;
     }];
     customer: Customer;
 }

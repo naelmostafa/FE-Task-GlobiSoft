@@ -19,12 +19,8 @@ export class ShowCustomersComponent implements OnInit {
   ngOnInit(): void {
     this.customerService.getAllCustomers().subscribe(
       {
-        next: (response: Customer[]) => {
-          this.customers = response;
-          console.log(response);
-        },
+        next: (response: Customer[]) => this.customers = response,
         error: (error: any) => console.log(error),
-
         complete: () => console.log('complete')
       },
     )
@@ -34,7 +30,6 @@ export class ShowCustomersComponent implements OnInit {
     console.log(customer);
     this.customerService.deleteCustomer(customer.id!).subscribe({
       next: (v) => {
-        console.log(v);
         this.customers.splice(this.customers.indexOf(customer), 1);
         this.table.renderRows();
       },

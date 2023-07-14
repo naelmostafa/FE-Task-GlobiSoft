@@ -16,7 +16,8 @@ export class ShowProductsComponent implements OnInit {
     this.productServices.getAllProducts().subscribe(
       {
         next: (v: Product[]) => this.products = v,
-        error: (error) => console.error(error)
+        error: (error) => console.error(error),
+        complete: () => console.log('Completed')
       }
     )
   }
@@ -24,12 +25,10 @@ export class ShowProductsComponent implements OnInit {
 
   deleteProduct(product: Product) {
     this.productServices.deleteProduct(product.id!).subscribe(
-      (response: any) => {
-        this.products.splice(this.products.indexOf(product), 1);
-        console.log(response);
-      },
-      (error: any) => {
-        console.log(error);
+      {
+        next: (response) => this.products.splice(this.products.indexOf(product), 1),
+        error: (error) => console.error(error),
+        complete: () => console.log('Completed')
       }
     )
   }

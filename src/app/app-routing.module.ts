@@ -6,6 +6,7 @@ import { ShowProductsComponent } from './show-products/show-products.component';
 import { ShowCustomersComponent } from './show-customers/show-customers.component';
 import { AddNewCustomerComponent } from './add-new-customer/add-new-customer.component';
 import { AddNewOrderComponent } from './add-new-order/add-new-order.component';
+import { ShowOrdersComponent } from './show-orders/show-orders.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'add-customer', component: AddNewCustomerComponent },
   { path: 'customers', component: ShowCustomersComponent },
   { path: 'new-order', component: AddNewOrderComponent },
+  { path: 'orders', component: ShowOrdersComponent },
 ];
 
 @NgModule({
